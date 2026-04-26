@@ -22,6 +22,7 @@ func main() {
 	if err != nil {
 		log.Fatal("Unable to connect to database")
 	}
+	log.Println("Database connected")
 
 	userRepo := repository.NewUserRepository(db)
 	sessionRepo := repository.NewSessionRepository(db)
@@ -34,10 +35,6 @@ func main() {
 
 	profileService := service.ProfileService{
 		ProfileRepo: profileRepo,
-	}
-
-	if err != nil {
-		log.Fatalf("Error connecting database: %v", err)
 	}
 
 	template, err := config.GetTemplates()

@@ -23,6 +23,7 @@ func (s *SessionRepository) CreateSession(userid int64, expiry time.Time) (strin
 	sid := utils.GenerateSessionID()
 	_, err := s.DB.Exec("INSERT INTO sessions (id, user_id, created_at, expires_at) VALUES (?,?, ?, ?)", sid, userid, time.Now(), expiry)
 	if err != nil {
+		log.Printf("[login - create session]: errror in creating session: %v", err)
 		return "", err
 	}
 	return sid, nil
