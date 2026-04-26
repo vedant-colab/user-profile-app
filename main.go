@@ -19,6 +19,9 @@ func main() {
 	googleOauth := config.InitializeOauth()
 
 	db, err := repository.InitDB()
+	if err != nil {
+		log.Fatal("Unable to connect to database")
+	}
 
 	userRepo := repository.NewUserRepository(db)
 	sessionRepo := repository.NewSessionRepository(db)

@@ -20,10 +20,10 @@ func (h *Handler) LoginAPI(w http.ResponseWriter, r *http.Request) {
 	}
 
 	r.ParseForm()
-
 	email := strings.TrimSpace(r.FormValue("email"))
 	password := strings.TrimSpace(r.FormValue("password"))
 
+	log.Printf("[login - body]: email: %s,password: %s", email, password)
 	if email == "" || password == "" {
 		response.Error(w, http.StatusBadRequest, "email and password required")
 		return
@@ -36,12 +36,14 @@ func (h *Handler) LoginAPI(w http.ResponseWriter, r *http.Request) {
 	}
 
 	if !utils.CompareHashPasswords(*user.PasswordHash, password) {
+		log.Printf("[login - password hash]: invalid password match")
 		response.Error(w, http.StatusUnauthorized, "wrong password")
 		return
 	}
 
 	sid, err := h.AuthService.CreateSession(user.ID)
 	if err != nil {
+		log.Printf("[login - session creation]: no session created")
 		response.Error(w, http.StatusInternalServerError, "failed to create session")
 		return
 	}
