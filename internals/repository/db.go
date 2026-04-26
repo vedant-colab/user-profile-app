@@ -3,8 +3,8 @@ package repository
 import (
 	"database/sql"
 
-	"github.com/vedant-colab/github.com/vedant-colab/user-profile-app/internals/app"
-	"github.com/vedant-colab/github.com/vedant-colab/user-profile-app/internals/config"
+	"github.com/vedant-colab/user-profile-app/internals/app"
+	"github.com/vedant-colab/user-profile-app/internals/config"
 
 	_ "github.com/go-sql-driver/mysql"
 )

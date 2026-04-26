@@ -4,9 +4,9 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/vedant-colab/github.com/vedant-colab/user-profile-app/internals/models"
-	"github.com/vedant-colab/github.com/vedant-colab/user-profile-app/internals/repository"
-	"github.com/vedant-colab/github.com/vedant-colab/user-profile-app/internals/utils"
+	"github.com/vedant-colab/user-profile-app/internals/models"
+	"github.com/vedant-colab/user-profile-app/internals/repository"
+	"github.com/vedant-colab/user-profile-app/internals/utils"
 )
 
 type AuthService struct {

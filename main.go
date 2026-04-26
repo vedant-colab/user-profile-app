@@ -4,13 +4,13 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/vedant-colab/github.com/vedant-colab/user-profile-app/internals/api/handlers"
-	"github.com/vedant-colab/github.com/vedant-colab/user-profile-app/internals/api/pages"
-	"github.com/vedant-colab/github.com/vedant-colab/user-profile-app/internals/app"
-	"github.com/vedant-colab/github.com/vedant-colab/user-profile-app/internals/config"
-	middleware "github.com/vedant-colab/github.com/vedant-colab/user-profile-app/internals/middlewares"
-	"github.com/vedant-colab/github.com/vedant-colab/user-profile-app/internals/repository"
-	"github.com/vedant-colab/github.com/vedant-colab/user-profile-app/internals/service"
+	"github.com/vedant-colab/user-profile-app/internals/api/handlers"
+	"github.com/vedant-colab/user-profile-app/internals/api/pages"
+	"github.com/vedant-colab/user-profile-app/internals/app"
+	"github.com/vedant-colab/user-profile-app/internals/config"
+	middleware "github.com/vedant-colab/user-profile-app/internals/middlewares"
+	"github.com/vedant-colab/user-profile-app/internals/repository"
+	"github.com/vedant-colab/user-profile-app/internals/service"
 
 	"github.com/joho/godotenv"
 )

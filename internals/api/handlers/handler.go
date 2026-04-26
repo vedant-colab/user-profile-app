@@ -1,8 +1,8 @@
 package handlers
 
 import (
-	"github.com/vedant-colab/github.com/vedant-colab/user-profile-app/internals/app"
-	"github.com/vedant-colab/github.com/vedant-colab/user-profile-app/internals/service"
+	"github.com/vedant-colab/user-profile-app/internals/app"
+	"github.com/vedant-colab/user-profile-app/internals/service"
 
 	"golang.org/x/oauth2"
 )

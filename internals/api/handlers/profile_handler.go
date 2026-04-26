@@ -5,9 +5,9 @@ import (
 	"net/http"
 	"strings"
 
-	"github.com/vedant-colab/github.com/vedant-colab/user-profile-app/internals/api/response"
-	middleware "github.com/vedant-colab/github.com/vedant-colab/user-profile-app/internals/middlewares"
-	"github.com/vedant-colab/github.com/vedant-colab/user-profile-app/internals/models"
+	"github.com/vedant-colab/user-profile-app/internals/api/response"
+	middleware "github.com/vedant-colab/user-profile-app/internals/middlewares"
+	"github.com/vedant-colab/user-profile-app/internals/models"
 )
 
 func (h *Handler) GetProfileAPI(w http.ResponseWriter, r *http.Request) {
