@@ -196,6 +196,7 @@ func (h *Handler) GoogleCallbackAPI(w http.ResponseWriter, r *http.Request) {
 	}
 	sid, err := h.AuthService.CreateSession(user.ID)
 	if err != nil {
+		log.Printf("[google call back api - session]: failed to create session : %v", err)
 		response.Error(w, http.StatusInternalServerError, "failed to create session")
 		return
 	}

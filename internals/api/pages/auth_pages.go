@@ -78,6 +78,7 @@ func (h *PageHandler) Callback(w http.ResponseWriter, r *http.Request) {
 	defer resp.Body.Close()
 
 	for _, c := range resp.Cookies() {
+		log.Printf("[callback - cookies]: %v", c)
 		http.SetCookie(w, c)
 	}
 
@@ -88,13 +89,14 @@ func (h *PageHandler) Callback(w http.ResponseWriter, r *http.Request) {
 			ProfileExists bool  `json:"profileExists"`
 		} `json:"data"`
 	}
-
 	if err := json.NewDecoder(resp.Body).Decode(&apiResp); err != nil {
 		http.Error(w, "invalid response", http.StatusInternalServerError)
+		log.Printf("[callback]: invalid response %v", err)
 		return
 	}
 
 	if !apiResp.Data.ProfileExists {
+		log.Printf("[callback - password hash]: invalid password match")
 		http.Redirect(w, r, "/profile/create", http.StatusSeeOther)
 		return
 	}
