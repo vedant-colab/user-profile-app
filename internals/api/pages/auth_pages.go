@@ -141,6 +141,7 @@ func (h *PageHandler) SignupHandler(w http.ResponseWriter, r *http.Request) {
 		}
 		defer resp.Body.Close()
 
+		log.Printf("[signup - api status code]: %v", resp.StatusCode)
 		if resp.StatusCode != http.StatusOK {
 			http.Error(w, "signup failed", http.StatusBadRequest)
 			return

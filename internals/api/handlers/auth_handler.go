@@ -71,7 +71,7 @@ func (h *Handler) SignupAPI(w http.ResponseWriter, r *http.Request) {
 
 	email := strings.TrimSpace(r.FormValue("email"))
 	password := strings.TrimSpace(r.FormValue("password"))
-
+	log.Printf("[signup - body]: email: %s,password: %s", email, password)
 	if email == "" || password == "" {
 		response.Error(w, http.StatusBadRequest, "email and password required")
 		return
@@ -79,11 +79,12 @@ func (h *Handler) SignupAPI(w http.ResponseWriter, r *http.Request) {
 
 	user, err := h.AuthService.GetUserByEmail(email)
 	if err != nil {
+		log.Printf("[signup - fetching user]: %v", err)
 		response.Error(w, http.StatusInternalServerError, "error fetching user")
 		return
 	}
 	if user != nil {
-		response.Error(w, http.StatusConflict, "error fetching user")
+		response.Error(w, http.StatusConflict, "user already exists")
 		return
 	}
 
