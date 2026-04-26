@@ -150,7 +150,7 @@ func (h *PageHandler) SignupHandler(w http.ResponseWriter, r *http.Request) {
 			http.SetCookie(w, c)
 		}
 
-		http.Redirect(w, r, "/profile", http.StatusSeeOther)
+		http.Redirect(w, r, "/profile/create", http.StatusSeeOther)
 		return
 	}
 
