@@ -210,7 +210,6 @@ func (h *Handler) GoogleCallbackAPI(w http.ResponseWriter, r *http.Request) {
 		Secure:   true,
 	})
 	profile, err := h.AuthService.FetchProfileById(user.ID)
-	log.Println("profile userid", profile.UserID)
 	if err != nil {
 		response.Error(w, http.StatusInternalServerError, "failed to fetch profile")
 		return
