@@ -52,7 +52,8 @@ func (h *Handler) LoginAPI(w http.ResponseWriter, r *http.Request) {
 		Path:     "/",
 		HttpOnly: true,
 		Secure:   true,
-		SameSite: http.SameSiteLaxMode,
+		Domain:   "",
+		SameSite: http.SameSiteNoneMode,
 	})
 
 	w.Header().Set("Content-Type", "application/json")
@@ -103,7 +104,7 @@ func (h *Handler) SignupAPI(w http.ResponseWriter, r *http.Request) {
 		Value:    sid,
 		Path:     "/",
 		HttpOnly: true,
-		SameSite: http.SameSiteLaxMode,
+		SameSite: http.SameSiteNoneMode,
 		Secure:   true,
 	})
 
@@ -123,7 +124,7 @@ func (h *Handler) LogoutAPI(w http.ResponseWriter, r *http.Request) {
 		Path:     "/",
 		HttpOnly: true,
 		Secure:   true,
-		SameSite: http.SameSiteLaxMode,
+		SameSite: http.SameSiteNoneMode,
 		MaxAge:   -1,
 	})
 
@@ -202,7 +203,7 @@ func (h *Handler) GoogleCallbackAPI(w http.ResponseWriter, r *http.Request) {
 		Value:    sid,
 		Path:     "/",
 		HttpOnly: true,
-		SameSite: http.SameSiteLaxMode,
+		SameSite: http.SameSiteNoneMode,
 		Secure:   true,
 	})
 	profile, err := h.AuthService.FetchProfileById(user.ID)
