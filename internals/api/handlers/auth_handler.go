@@ -52,7 +52,6 @@ func (h *Handler) LoginAPI(w http.ResponseWriter, r *http.Request) {
 		Path:     "/",
 		HttpOnly: true,
 		Secure:   true,
-		Domain:   "",
 		SameSite: http.SameSiteNoneMode,
 	})
 
