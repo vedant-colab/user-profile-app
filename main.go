@@ -62,6 +62,7 @@ func main() {
 
 	http.HandleFunc("/api/login", h.LoginAPI)
 	http.HandleFunc("/api/signup", h.SignupAPI)
+	http.Handle("/api/logout", authMiddleware(http.HandlerFunc(h.LogoutAPI)))
 	http.HandleFunc("/api/auth/google/callback", h.GoogleCallbackAPI)
 	http.Handle("/api/profile", authMiddleware(http.HandlerFunc(h.GetProfileAPI)))
 	http.Handle("/api/profile/create", authMiddleware(http.HandlerFunc(h.CreateProfileAPI)))
@@ -69,6 +70,7 @@ func main() {
 
 	http.HandleFunc("/", pHand.LoginHandler)
 	http.HandleFunc("/signup", pHand.SignupHandler)
+	http.HandleFunc("/logout", pHand.Logout)
 	http.HandleFunc("/auth/google", pHand.GoogleHandler)
 	http.HandleFunc("/auth/google/callback", pHand.Callback)
 	http.HandleFunc("/profile", pHand.ProfileHandler)
