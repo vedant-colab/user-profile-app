@@ -123,7 +123,10 @@ func (h *PageHandler) Logout(w http.ResponseWriter, r *http.Request) {
 
 func (h *PageHandler) SignupHandler(w http.ResponseWriter, r *http.Request) {
 	if r.Method == "POST" {
-
+		if err := r.ParseForm(); err != nil {
+			http.Error(w, "invalid form", http.StatusBadRequest)
+			return
+		}
 		resp, err := http.PostForm(
 			h.BaseURL+"/api/signup",
 			url.Values{
@@ -146,7 +149,7 @@ func (h *PageHandler) SignupHandler(w http.ResponseWriter, r *http.Request) {
 			http.SetCookie(w, c)
 		}
 
-		http.Redirect(w, r, "/profile/	", http.StatusSeeOther)
+		http.Redirect(w, r, "/profile", http.StatusSeeOther)
 		return
 	}
 
