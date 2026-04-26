@@ -6,7 +6,7 @@ import (
 	"net/url"
 	"strings"
 
-	"github.com/vedant-colab/user-profile-app/internals/utils"
+	"github.com/vedant-colab/github.com/vedant-colab/user-profile-app/internals/utils"
 )
 
 func (h *PageHandler) LoginHandler(w http.ResponseWriter, r *http.Request) {

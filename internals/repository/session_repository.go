@@ -4,7 +4,7 @@ import (
 	"database/sql"
 	"time"
 
-	"github.com/vedant-colab/user-profile-app/internals/utils"
+	"github.com/vedant-colab/github.com/vedant-colab/user-profile-app/internals/utils"
 )
 
 type SessionRepository struct {
