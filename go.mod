@@ -1,4 +1,4 @@
-module user-profile-app
+module github.com/vedant-colab/user-profile-app
 
 go 1.26.2
 

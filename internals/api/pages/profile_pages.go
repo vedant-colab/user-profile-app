@@ -5,7 +5,8 @@ import (
 	"net/http"
 	"net/url"
 	"strings"
-	"user-profile-app/internals/models"
+
+	"github.com/vedant-colab/user-profile-app/internals/models"
 )
 
 func (h *PageHandler) ProfileHandler(w http.ResponseWriter, r *http.Request) {

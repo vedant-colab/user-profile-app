@@ -1,7 +1,7 @@
 package service
 
 import (
-	"user-profile-app/internals/repository"
+	"github.com/vedant-colab/user-profile-app/internals/repository"
 )
 
 type ProfileService struct {

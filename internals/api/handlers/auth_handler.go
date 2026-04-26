@@ -6,9 +6,10 @@ import (
 	"net/http"
 	"os"
 	"strings"
-	"user-profile-app/internals/api/response"
-	"user-profile-app/internals/models"
-	"user-profile-app/internals/utils"
+
+	"github.com/vedant-colab/user-profile-app/internals/api/response"
+	"github.com/vedant-colab/user-profile-app/internals/models"
+	"github.com/vedant-colab/user-profile-app/internals/utils"
 )
 
 func (h *Handler) LoginAPI(w http.ResponseWriter, r *http.Request) {

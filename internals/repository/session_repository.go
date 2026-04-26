@@ -3,7 +3,8 @@ package repository
 import (
 	"database/sql"
 	"time"
-	"user-profile-app/internals/utils"
+
+	"github.com/vedant-colab/user-profile-app/internals/utils"
 )
 
 type SessionRepository struct {

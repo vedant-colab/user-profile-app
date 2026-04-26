@@ -2,7 +2,8 @@ package pages
 
 import (
 	"net/http"
-	"user-profile-app/internals/app"
+
+	"github.com/vedant-colab/user-profile-app/internals/app"
 
 	"golang.org/x/oauth2"
 )

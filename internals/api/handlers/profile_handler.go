@@ -4,9 +4,10 @@ import (
 	"log"
 	"net/http"
 	"strings"
-	"user-profile-app/internals/api/response"
-	middleware "user-profile-app/internals/middlewares"
-	"user-profile-app/internals/models"
+
+	"github.com/vedant-colab/user-profile-app/internals/api/response"
+	middleware "github.com/vedant-colab/user-profile-app/internals/middlewares"
+	"github.com/vedant-colab/user-profile-app/internals/models"
 )
 
 func (h *Handler) GetProfileAPI(w http.ResponseWriter, r *http.Request) {

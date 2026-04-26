@@ -3,13 +3,14 @@ package main
 import (
 	"log"
 	"net/http"
-	"user-profile-app/internals/api/handlers"
-	"user-profile-app/internals/api/pages"
-	"user-profile-app/internals/app"
-	"user-profile-app/internals/config"
-	middleware "user-profile-app/internals/middlewares"
-	"user-profile-app/internals/repository"
-	"user-profile-app/internals/service"
+
+	"github.com/vedant-colab/user-profile-app/internals/api/handlers"
+	"github.com/vedant-colab/user-profile-app/internals/api/pages"
+	"github.com/vedant-colab/user-profile-app/internals/app"
+	"github.com/vedant-colab/user-profile-app/internals/config"
+	middleware "github.com/vedant-colab/user-profile-app/internals/middlewares"
+	"github.com/vedant-colab/user-profile-app/internals/repository"
+	"github.com/vedant-colab/user-profile-app/internals/service"
 
 	"github.com/joho/godotenv"
 )

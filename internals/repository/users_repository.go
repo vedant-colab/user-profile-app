@@ -3,7 +3,8 @@ package repository
 import (
 	"database/sql"
 	"fmt"
-	"user-profile-app/internals/models"
+
+	"github.com/vedant-colab/user-profile-app/internals/models"
 )
 
 type UserRepository struct {
