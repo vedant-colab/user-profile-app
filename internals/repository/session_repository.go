@@ -4,6 +4,8 @@ import (
 	"database/sql"
 	"time"
 
+	"log"
+
 	"github.com/vedant-colab/user-profile-app/internals/utils"
 )
 
@@ -40,5 +42,11 @@ func (s *SessionRepository) GetUserIDFromSession(sid string) (int64, error) {
 
 func (s *SessionRepository) DeleteSession(sid string) error {
 	_, err := s.DB.Exec("DELETE FROM sessions WHERE id = ?", sid)
+	return err
+}
+
+func (s *SessionRepository) DeleteSessionByUserID(userid int64) error {
+	_, err := s.DB.Exec("DELETE FROM sessions WHERE user_id = ?", userid)
+	log.Println(err)
 	return err
 }

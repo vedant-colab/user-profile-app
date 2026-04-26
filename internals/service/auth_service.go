@@ -51,6 +51,7 @@ func (a *AuthService) GoogleLoginService(googleUser *models.GoogleUser) (*models
 }
 
 func (a *AuthService) CreateSession(id int64) (string, error) {
+	_ = a.SessionRepo.DeleteSessionByUserID(id)
 	now := time.Now()
 	expiry := now.Add(24 * time.Hour)
 	sid, err := a.SessionRepo.CreateSession(id, expiry)

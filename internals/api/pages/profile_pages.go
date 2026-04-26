@@ -29,13 +29,18 @@ func (h *PageHandler) ProfileHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	var data models.ProfileResponse
-	err = json.NewDecoder(resp.Body).Decode(&data)
+	var apiResp struct {
+		Status string                 `json:"status"`
+		Data   models.ProfileResponse `json:"data"`
+	}
+
+	err = json.NewDecoder(resp.Body).Decode(&apiResp)
 	if err != nil {
 		http.Error(w, "invalid response", http.StatusInternalServerError)
 		return
 	}
-	h.App.Tpl.ExecuteTemplate(w, "profile.html", data)
+
+	h.App.Tpl.ExecuteTemplate(w, "profile.html", apiResp.Data)
 }
 
 func (h *PageHandler) CreateProfileHandler(w http.ResponseWriter, r *http.Request) {
@@ -84,12 +89,23 @@ func (h *PageHandler) EditProfileHandler(w http.ResponseWriter, r *http.Request)
 			http.Error(w, "failed to fetch profile", http.StatusInternalServerError)
 			return
 		}
+		if resp.StatusCode != http.StatusOK {
+			http.Error(w, "failed to fetch profile", http.StatusUnauthorized)
+			return
+		}
 		defer resp.Body.Close()
 
-		var data models.ProfileResponse
-		json.NewDecoder(resp.Body).Decode(&data)
+		var apiResp struct {
+			Status string                 `json:"status"`
+			Data   models.ProfileResponse `json:"data"`
+		}
 
-		h.App.Tpl.ExecuteTemplate(w, "profile_edit.html", data)
+		if err := json.NewDecoder(resp.Body).Decode(&apiResp); err != nil {
+			http.Error(w, "invalid response", http.StatusInternalServerError)
+			return
+		}
+
+		h.App.Tpl.ExecuteTemplate(w, "profile_edit.html", apiResp.Data)
 		return
 	}
 	if r.Method == "POST" {

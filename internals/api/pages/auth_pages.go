@@ -2,6 +2,7 @@ package pages
 
 import (
 	"encoding/json"
+	"log"
 	"net/http"
 	"net/url"
 	"strings"
@@ -48,6 +49,7 @@ func (h *PageHandler) GoogleHandler(w http.ResponseWriter, r *http.Request) {
 	http.SetCookie(w, &http.Cookie{
 		Name:     "oauth_state",
 		Value:    state,
+		Path:     "/",
 		HttpOnly: true,
 		Secure:   true,
 	})
@@ -67,6 +69,7 @@ func (h *PageHandler) Callback(w http.ResponseWriter, r *http.Request) {
 
 	resp, err := http.DefaultClient.Do(req)
 	if err != nil {
+		log.Printf("callback: %v", err)
 		json.NewEncoder(w).Encode(map[string]string{
 			"error": "oauth failed",
 		})
@@ -78,18 +81,23 @@ func (h *PageHandler) Callback(w http.ResponseWriter, r *http.Request) {
 		http.SetCookie(w, c)
 	}
 
-	var result struct {
-		UserID        int64 `json:"user_id"`
-		ProfileExists bool  `json:"profileExists"`
+	var apiResp struct {
+		Status string `json:"status"`
+		Data   struct {
+			UserID        int64 `json:"user_id"`
+			ProfileExists bool  `json:"profileExists"`
+		} `json:"data"`
 	}
 
-	json.NewDecoder(resp.Body).Decode(&result)
-
-	if !result.ProfileExists {
-		http.Redirect(w, r, "/profile/create", http.StatusSeeOther)
+	if err := json.NewDecoder(resp.Body).Decode(&apiResp); err != nil {
+		http.Error(w, "invalid response", http.StatusInternalServerError)
 		return
 	}
 
+	if !apiResp.Data.ProfileExists {
+		http.Redirect(w, r, "/profile/create", http.StatusSeeOther)
+		return
+	}
 	http.Redirect(w, r, "/profile", http.StatusSeeOther)
 }
 
@@ -138,7 +146,7 @@ func (h *PageHandler) SignupHandler(w http.ResponseWriter, r *http.Request) {
 			http.SetCookie(w, c)
 		}
 
-		http.Redirect(w, r, "/profile/create", http.StatusSeeOther)
+		http.Redirect(w, r, "/profile/	", http.StatusSeeOther)
 		return
 	}
 

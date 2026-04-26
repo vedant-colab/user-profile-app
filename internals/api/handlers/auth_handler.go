@@ -3,6 +3,7 @@ package handlers
 import (
 	"encoding/json"
 	"io"
+	"log"
 	"net/http"
 	"os"
 	"strings"
@@ -50,7 +51,8 @@ func (h *Handler) LoginAPI(w http.ResponseWriter, r *http.Request) {
 		Value:    sid,
 		Path:     "/",
 		HttpOnly: true,
-		Secure:   false,
+		Secure:   true,
+		SameSite: http.SameSiteLaxMode,
 	})
 
 	w.Header().Set("Content-Type", "application/json")
@@ -101,6 +103,8 @@ func (h *Handler) SignupAPI(w http.ResponseWriter, r *http.Request) {
 		Value:    sid,
 		Path:     "/",
 		HttpOnly: true,
+		SameSite: http.SameSiteLaxMode,
+		Secure:   true,
 	})
 
 	response.Success(w, map[string]string{
@@ -118,7 +122,17 @@ func (h *Handler) LogoutAPI(w http.ResponseWriter, r *http.Request) {
 		Value:    "",
 		Path:     "/",
 		HttpOnly: true,
+		Secure:   true,
+		SameSite: http.SameSiteLaxMode,
 		MaxAge:   -1,
+	})
+
+	http.SetCookie(w, &http.Cookie{
+		Name:     "oauth_state",
+		Value:    "",
+		Path:     "/",
+		MaxAge:   -1,
+		HttpOnly: true,
 	})
 
 	response.Success(w, map[string]string{
@@ -147,6 +161,13 @@ func (h *Handler) GoogleCallbackAPI(w http.ResponseWriter, r *http.Request) {
 		response.Error(w, http.StatusInternalServerError, "failed to fetch user info")
 		return
 	}
+	http.SetCookie(w, &http.Cookie{
+		Name:     "oauth_state",
+		Value:    "",
+		Path:     "/",
+		MaxAge:   -1,
+		HttpOnly: true,
+	})
 	defer resp.Body.Close()
 
 	if resp.StatusCode != http.StatusOK {
@@ -181,8 +202,11 @@ func (h *Handler) GoogleCallbackAPI(w http.ResponseWriter, r *http.Request) {
 		Value:    sid,
 		Path:     "/",
 		HttpOnly: true,
+		SameSite: http.SameSiteLaxMode,
+		Secure:   true,
 	})
 	profile, err := h.AuthService.FetchProfileById(user.ID)
+	log.Println("profile userid", profile.UserID)
 	if err != nil {
 		response.Error(w, http.StatusInternalServerError, "failed to fetch profile")
 		return
