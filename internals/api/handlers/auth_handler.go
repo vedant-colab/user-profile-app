@@ -124,66 +124,6 @@ func (h *Handler) LogoutAPI(w http.ResponseWriter, r *http.Request) {
 		"status": "logged out",
 	})
 }
-
-// func (h *Handler) GoogleCallbackAPI(w http.ResponseWriter, r *http.Request) {
-
-// 	cookie, err := r.Cookie("oauth_state")
-// 	if err != nil || cookie.Value != r.FormValue("state") {
-// 		http.Error(w, "invalid oauth state", http.StatusUnauthorized)
-// 		return
-// 	}
-
-// 	code := r.URL.Query().Get("code")
-
-// 	token, err := h.Oauth.Exchange(r.Context(), code)
-// 	if err != nil {
-// 		http.Error(w, "code exchange failed", http.StatusInternalServerError)
-// 		return
-// 	}
-
-// 	client := h.Oauth.Client(r.Context(), token)
-
-// 	resp, err := client.Get(os.Getenv("GOOGLE_USER_INFO"))
-// 	if err != nil {
-// 		http.Error(w, "failed to fetch user info", http.StatusInternalServerError)
-// 		return
-// 	}
-// 	defer resp.Body.Close()
-
-// 	data, _ := io.ReadAll(resp.Body)
-
-// 	var googleUser models.GoogleUser
-// 	json.Unmarshal(data, &googleUser)
-
-// 	user, err := h.AuthService.GoogleLoginService(&googleUser)
-// 	if err != nil {
-// 		http.Error(w, err.Error(), http.StatusInternalServerError)
-// 		return
-// 	}
-
-// 	sid, err := h.AuthService.CreateSession(user.ID)
-// 	if err != nil {
-// 		http.Error(w, "failed to create session", http.StatusInternalServerError)
-// 		return
-// 	}
-
-// 	http.SetCookie(w, &http.Cookie{
-// 		Name:     "sid",
-// 		Value:    sid,
-// 		Path:     "/",
-// 		HttpOnly: true,
-// 	})
-
-// 	// check profile existence here
-// 	profile, _ := h.AuthService.FetchProfileById(user.ID)
-
-// 	w.Header().Set("Content-Type", "application/json")
-// 	json.NewEncoder(w).Encode(map[string]interface{}{
-// 		"user_id":       user.ID,
-// 		"profileExists": profile != nil,
-// 	})
-// }
-
 func (h *Handler) GoogleCallbackAPI(w http.ResponseWriter, r *http.Request) {
 	cookie, err := r.Cookie("oauth_state")
 	if err != nil || cookie.Value != r.FormValue("state") {
