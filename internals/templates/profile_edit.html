@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Edit Profile</title>
+</head>
+<body>
+
+  <div style="display:flex; justify-content:center; align-items:center; min-height:100vh;">
+    <div>
+      <h2>Edit Profile</h2>
+      <hr />
+
+      <form method="POST" action="/profile/update">
+
+        <p>
+          <label for="full_name">Full Name</label><br />
+          <input type="text" id="full_name" name="full_name" value="{{.Profile.FullName | deref}}" />
+        </p>
+
+        <p>
+          <label for="email">Email</label><br />
+          {{if .ManualUser}}
+            <input type="email" id="email" name="email" value="{{.User.Email}}" />
+          {{else}}
+            <input type="email" id="email" name="email" value="{{.User.Email}}" disabled />
+          {{end}}
+        </p>
+
+        <p>
+          <label for="phone">Phone</label><br />
+          <input type="tel" id="phone" name="phone" value="{{.Profile.Phone | deref}}" />
+        </p>
+
+        <br />
+        <button type="submit">Save &amp; Continue</button>
+        <button type="button" onclick="window.location.href='/profile'">Cancel</button>
+
+      </form>
+    </div>
+  </div>
+
+</body>
+</html>

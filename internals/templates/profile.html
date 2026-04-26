@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Profile</title>
+</head>
+<body>
+
+  <div style="display:flex; justify-content:center; align-items:center; min-height:100vh;">
+    <div>
+      <h2>Profile</h2>
+      <hr />
+
+      <p><strong>Full Name:</strong> {{.Profile.FullName | deref}}</p>
+      <p><strong>Email:</strong> {{.User.Email}}</p>
+      <p><strong>Phone:</strong> {{.Profile.Phone | deref}}</p>
+
+      <br />
+      <button onclick="window.location.href='/profile/update'">Edit</button>
+      <button onclick="window.location.href='/auth/logout'">Logout</button>
+    </div>
+  </div>
+
+</body>
+</html>

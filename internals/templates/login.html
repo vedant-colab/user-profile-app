@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+</head>
+<body>
+
+  <div style="display:flex; justify-content:center; align-items:center; min-height:100vh;">
+    <div>
+      <h2>Login</h2>
+
+      {{if .Error}}
+        <p>{{.Error}}</p>
+      {{end}}
+
+      <form method="POST" action="/">
+        <label for="email">Email:</label><br>
+        <input type="email" id="email" name="email" required /><br><br>
+
+        <label for="password">Password:</label><br>
+        <input type="password" id="password" name="password" required /><br><br>
+
+        <button type="submit">Login</button>
+      </form>
+
+      <br>
+      <a href="/auth/google">Sign in with Google</a>
+
+      <br><br>
+      <p>Don't have an account? <a href="/auth/signup">Sign up</a></p>
+    </div>
+  </div>
+
+</body>
+</html>
